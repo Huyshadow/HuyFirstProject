@@ -39,3 +39,25 @@ def counter(request):
     text = request.POST['text']
     nums_of_word = len(text.split())
     return render(request,'counter.html',{'nums_of_word': nums_of_word}) 
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user =auth.authenticate(username = username, password = password )
+        if user is not None:
+            auth.login(request,user)
+            return redirect('index')
+        else:
+            messages.info(request,"Account not Found")
+            return redirect('login')
+    else:
+        return render(request,'login.html', )
+
+def logout(request):
+    auth.logout(request)
+    return redirect('index')
+
+def post(request,pk):
+    return render(request,'post.html', {'pk': pk} ) 
