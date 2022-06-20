@@ -36,9 +36,8 @@ def register(request):
         return render(request,'register.html',)
 
 def counter(request):
-    text = request.POST['text']
-    nums_of_word = len(text.split())
-    return render(request,'counter.html',{'nums_of_word': nums_of_word}) 
+    posts=[1,2,3,4,5,'tim','tom','john']
+    return render(request,'counter.html',{'posts':posts})
 
 def login(request):
     if request.method == "POST":
@@ -61,3 +60,4 @@ def logout(request):
 
 def post(request,pk):
     return render(request,'post.html', {'pk': pk} ) 
+
